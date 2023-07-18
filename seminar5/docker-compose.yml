@@ -1,0 +1,23 @@
+version: '3.9'
+
+services:
+
+ db:
+  build:
+   dockerfile: ./Dockerfile
+  environment:
+   MYSQL_ROOT_PASSWORD: test123
+  deploy:
+    mode: replicated
+    replicas: 2
+
+ adminer:
+  image: adminer:4.8.1
+  restart: always
+  ports:
+    - 6080:8080
+  volumes:
+    - ./myfolder:/myfolder
+  deploy:
+    mode: replicated
+    replicas: 1
